@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOP Git Termux - Fandevid</title>
+    <title>SOP Git Pemula - Fandevid</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;900&family=Space+Mono:wght@700&display=swap');
 
         :root {
-            --bg: #FFD100;
+            --bg: #00FF41; /* Matrix Green */
             --card-bg: #ffffff;
             --black: #000000;
-            --accent: #FF5C00;
-            --success: #00F0FF;
+            --accent: #ff0055;
+            --blue: #2e5bff;
         }
 
         body {
@@ -23,141 +23,180 @@
             color: var(--black);
         }
 
+        .container { max-width: 800px; margin: 0 auto; }
+
         .header {
-            text-align: center;
-            border: 4px solid var(--black);
-            background: var(--card-bg);
+            background: white;
+            border: 5px solid var(--black);
             padding: 20px;
-            box-shadow: 8px 8px 0px var(--black);
+            box-shadow: 10px 10px 0px var(--black);
             margin-bottom: 40px;
+            text-align: center;
         }
 
-        h1 { font-weight: 900; text-transform: uppercase; margin: 0; font-size: 2.5rem; }
-
-        .container { max-width: 800px; margin: 0 auto; }
+        h1 { font-weight: 900; text-transform: uppercase; margin: 0; font-size: 2rem; line-height: 1; }
 
         .step-card {
             background: var(--card-bg);
-            border: 4px solid var(--black);
-            box-shadow: 10px 10px 0px var(--black);
+            border: 5px solid var(--black);
+            box-shadow: 12px 12px 0px var(--black);
             padding: 25px;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             position: relative;
         }
 
         .step-tag {
             position: absolute;
-            top: -20px;
+            top: -25px;
             left: 20px;
-            background: var(--accent);
-            color: white;
-            padding: 5px 15px;
+            background: var(--black);
+            color: var(--bg);
+            padding: 8px 20px;
             font-weight: 900;
-            border: 3px solid var(--black);
-            box-shadow: 4px 4px 0px var(--black);
-        }
-
-        h2 { font-weight: 900; text-transform: uppercase; margin-top: 10px; }
-
-        .code-wrapper {
-            background: #222;
-            color: #00FF41;
-            padding: 15px;
-            border: 3px solid var(--black);
-            font-family: 'Space Mono', monospace;
-            position: relative;
-            margin: 15px 0;
-            overflow-x: auto;
-        }
-
-        .copy-btn {
-            position: absolute;
-            right: 10px;
-            top: 10px;
-            background: var(--success);
-            border: 2px solid var(--black);
-            font-family: 'Public Sans';
-            font-weight: 900;
-            cursor: pointer;
-            padding: 5px 10px;
-            font-size: 0.7rem;
+            border: 4px solid var(--black);
             text-transform: uppercase;
         }
 
-        .copy-btn:active { transform: translate(2px, 2px); }
+        h2 { font-weight: 900; text-transform: uppercase; margin-top: 10px; border-bottom: 4px solid var(--black); display: inline-block; }
 
-        .note {
-            background: #ffecb3;
-            border: 2px dashed var(--black);
-            padding: 10px;
-            font-size: 0.9rem;
-            margin-top: 10px;
+        p { font-weight: 700; margin-bottom: 5px; }
+
+        .instruction {
+            font-size: 0.85rem;
+            color: #444;
+            margin-bottom: 10px;
+            display: block;
         }
 
-        footer { text-align: center; font-weight: 900; margin-top: 50px; text-transform: uppercase; }
+        .code-box {
+            background: #f0f0f0;
+            border: 3px solid var(--black);
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            transition: 0.2s;
+        }
+
+        .code-box:hover { background: #e0e0e0; }
+
+        code {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            word-break: break-all;
+            font-size: 0.9rem;
+        }
+
+        .copy-btn {
+            background: var(--blue);
+            color: white;
+            border: 3px solid var(--black);
+            padding: 5px 15px;
+            font-weight: 900;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 4px 4px 0px var(--black);
+            margin-left: 10px;
+            min-width: 80px;
+        }
+
+        .copy-btn:active {
+            box-shadow: 0px 0px 0px var(--black);
+            transform: translate(4px, 4px);
+        }
+
+        .alert {
+            background: #ffdbdb;
+            border: 3px solid var(--accent);
+            padding: 15px;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+
+        footer { text-align: center; font-weight: 900; padding: 20px; text-transform: uppercase; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="header">
-        <h1>TERMUX GIT SOP</h1>
-        <p>No more errors. Just push it.</p>
+        <h1>GITHUB TERMUX<br>GUIDE FOR BEGINNER</h1>
     </div>
 
     <div class="step-card">
-        <div class="step-tag">FASE 1</div>
-        <h2>Setup Awal Sistem</h2>
-        <p>Lakukan ini satu kali saja saat install ulang Termux.</p>
+        <div class="step-tag">Step 1: Init Proyek</div>
+        <h2>Mulai dari Nol</h2>
+        <span class="instruction">Jalankan ini di dalam folder proyek baru Anda:</span>
         
-        <div class="code-wrapper">
-            <button class="copy-btn" onclick="copyText('c1')">Copy</button>
-            <code id="c1">pkg update && pkg upgrade && pkg install git</code>
+        <p>1. Aktifkan Git di folder ini:</p>
+        <div class="code-box">
+            <code id="init1">git init -b main</code>
+            <button class="copy-btn" onclick="copyText('init1')">Copy</button>
         </div>
 
-        <div class="code-wrapper">
-            <button class="copy-btn" onclick="copyText('c2')">Copy</button>
-            <code id="c2">git config --global user.name "user" && git config --global user.email "user@gmail.com"</code>
+        <p>2. Beri izin folder (WAJIB jika di SD CARD):</p>
+        <div class="code-box">
+            <code id="init2">git config --global --add safe.directory $(pwd)</code>
+            <button class="copy-btn" onclick="copyText('init2')">Copy</button>
         </div>
 
-        <div class="code-wrapper">
-            <button class="copy-btn" onclick="copyText('c3')">Copy</button>
-            <code id="c3">git config --global credential.helper store</code>
+        <p>3. Buat file index sebagai penanda:</p>
+        <div class="code-box">
+            <code id="init3">echo "&lt;h1&gt;Project Fandevid&lt;/h1&gt;" > index.html</code>
+            <button class="copy-btn" onclick="copyText('init3')">Copy</button>
         </div>
     </div>
 
     <div class="step-card">
-        <div class="step-tag">FASE 2</div>
-        <h2>Buat Project Baru</h2>
-        <p>Gunakan perintah ini untuk memulai folder project baru di internal.</p>
+        <div class="step-tag">Step 2: Menghubungkan</div>
+        <h2>Remote Ke Cloud</h2>
+        <span class="instruction">Pastikan sudah buat REPO di website GitHub dulu!</span>
         
-        <div class="code-wrapper">
-            <button class="copy-btn" onclick="copyText('c4')">Copy</button>
-            <code id="c4">cd ~ && mkdir project-name && cd project-name && git init -b main</code>
+        <div class="alert">
+            Ganti <b>USER</b> & <b>REPO</b> sesuai akunmu!
         </div>
 
-        <div class="note"><b>PENTING:</b> Buat repo di GitHub dulu, baru push di bawah ini.</div>
+        <p>1. Hubungkan ke GitHub:</p>
+        <div class="code-box">
+            <code id="rem1">git remote add origin https://github.com/USER/REPO.git</code>
+            <button class="copy-btn" onclick="copyText('rem1')">Copy</button>
+        </div>
 
-        <div class="code-wrapper">
-            <button class="copy-btn" onclick="copyText('c5')">Copy</button>
-            <code id="c5">git add . && git commit -m "Initial commit" && git push -u origin main</code>
+        <p>2. Jika salah alamat, gunakan ini untuk ganti:</p>
+        <div class="code-box">
+            <code id="rem2">git remote set-url origin https://github.com/USER/REPO.git</code>
+            <button class="copy-btn" onclick="copyText('rem2')">Copy</button>
         </div>
     </div>
 
-    <div class="step-card" style="border-color: var(--accent);">
-        <div class="step-tag" style="background: var(--success); color: black;">FASE 3</div>
-        <h2>Update Konten (Harian)</h2>
-        <p>Ritual 3-P setiap kali mengubah file.</p>
+    <div class="step-card">
+        <div class="step-tag">Step 3: Upload</div>
+        <h2>Kirim Data</h2>
         
-        <div class="code-wrapper">
-            <button class="copy-btn" onclick="copyText('c6')">Copy</button>
-            <code id="c6">git add . && git commit -m "Update konten" && git push</code>
+        <p>1. Bungkus filenya:</p>
+        <div class="code-box">
+            <code id="push1">git add . && git commit -m "Initial push"</code>
+            <button class="copy-btn" onclick="copyText('push1')">Copy</button>
+        </div>
+
+        <p>2. Kirim ke Internet (Gunakan Token PAT):</p>
+        <div class="code-box">
+            <code id="push2">git push -u origin main</code>
+            <button class="copy-btn" onclick="copyText('push2')">Copy</button>
         </div>
     </div>
 
-    <footer>
-        DIBUAT OLEH GEMINI UNTUK FANDEVID &copy; 2026
-    </footer>
+    <div class="step-card" style="background: var(--accent); color: white;">
+        <div class="step-tag" style="background: white; color: black;">Update Cepat</div>
+        <h2 style="border-color: white;">Besok-Besok Cukup Jalankan Ini:</h2>
+        <div class="code-box" style="background: white; color: black;">
+            <code id="upd1">git add . && git commit -m "Update" && git push</code>
+            <button class="copy-btn" onclick="copyText('upd1')">Copy</button>
+        </div>
+    </div>
+
+    <footer>Fandevid Developer Kit - 2026</footer>
 </div>
 
 <script>
@@ -165,12 +204,14 @@
         const text = document.getElementById(id).innerText;
         navigator.clipboard.writeText(text).then(() => {
             const btn = document.querySelector(`[onclick="copyText('${id}')"]`);
-            const originalText = btn.innerText;
+            const oldText = btn.innerText;
             btn.innerText = "COPIED!";
-            btn.style.background = "#fff";
+            btn.style.background = "var(--bg)";
+            btn.style.color = "black";
             setTimeout(() => {
-                btn.innerText = originalText;
-                btn.style.background = "#00F0FF";
+                btn.innerText = oldText;
+                btn.style.background = "var(--blue)";
+                btn.style.color = "white";
             }, 1000);
         });
     }
