@@ -1,191 +1,180 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOP Hosting GitHub via Termux</title>
+    <title>SOP Git Termux - Fandevid</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;900&family=Space+Mono:wght@700&display=swap');
 
         :root {
-            --bg-color: #f4f1de;
-            --accent-1: #ff5e5e; /* Red */
-            --accent-2: #80ed99; /* Green */
-            --accent-3: #4895ef; /* Blue */
-            --accent-4: #f7b267; /* Orange */
+            --bg: #FFD100;
+            --card-bg: #ffffff;
             --black: #000000;
+            --accent: #FF5C00;
+            --success: #00F0FF;
         }
 
         body {
-            background-color: var(--bg-color);
+            background-color: var(--bg);
             font-family: 'Public Sans', sans-serif;
-            color: var(--black);
+            padding: 20px;
             margin: 0;
-            padding: 40px 20px;
-            line-height: 1.5;
+            color: var(--black);
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
+        .header {
+            text-align: center;
+            border: 4px solid var(--black);
+            background: var(--card-bg);
+            padding: 20px;
+            box-shadow: 8px 8px 0px var(--black);
+            margin-bottom: 40px;
         }
 
-        /* Neobrutalism Style */
-        .card {
-            background: white;
+        h1 { font-weight: 900; text-transform: uppercase; margin: 0; font-size: 2.5rem; }
+
+        .container { max-width: 800px; margin: 0 auto; }
+
+        .step-card {
+            background: var(--card-bg);
             border: 4px solid var(--black);
             box-shadow: 10px 10px 0px var(--black);
-            padding: 30px;
-            margin-bottom: 40px;
+            padding: 25px;
+            margin-bottom: 30px;
             position: relative;
         }
 
-        h1 {
-            font-weight: 900;
-            font-size: 3rem;
-            text-transform: uppercase;
-            margin-top: 0;
-            background: var(--accent-1);
-            display: inline-block;
-            padding: 10px 20px;
-            border: 4px solid var(--black);
-            box-shadow: 6px 6px 0px var(--black);
-            transform: rotate(-2deg);
-        }
-
-        h2 {
-            font-weight: 900;
-            text-transform: uppercase;
-            border-bottom: 4px solid var(--black);
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-
-        .step-num {
-            background: var(--accent-2);
+        .step-tag {
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            background: var(--accent);
+            color: white;
             padding: 5px 15px;
-            border: 3px solid var(--black);
             font-weight: 900;
-            margin-right: 10px;
+            border: 3px solid var(--black);
             box-shadow: 4px 4px 0px var(--black);
         }
 
-        code, pre {
-            font-family: 'Space Mono', monospace;
-            background: #e9ecef;
-            border: 2px solid var(--black);
+        h2 { font-weight: 900; text-transform: uppercase; margin-top: 10px; }
+
+        .code-wrapper {
+            background: #222;
+            color: #00FF41;
             padding: 15px;
-            display: block;
-            white-space: pre-wrap;
-            word-break: break-all;
+            border: 3px solid var(--black);
+            font-family: 'Space Mono', monospace;
+            position: relative;
             margin: 15px 0;
-            font-weight: 700;
+            overflow-x: auto;
         }
 
-        .badge {
-            display: inline-block;
-            padding: 5px 10px;
-            font-weight: 700;
+        .copy-btn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background: var(--success);
             border: 2px solid var(--black);
-            margin-bottom: 10px;
+            font-family: 'Public Sans';
+            font-weight: 900;
+            cursor: pointer;
+            padding: 5px 10px;
+            font-size: 0.7rem;
             text-transform: uppercase;
         }
 
-        .badge-red { background: var(--accent-1); }
-        .badge-blue { background: var(--accent-3); }
-        .badge-orange { background: var(--accent-4); }
+        .copy-btn:active { transform: translate(2px, 2px); }
 
         .note {
-            background: #fff;
-            border-left: 10px solid var(--accent-3);
-            padding: 15px;
-            margin-top: 20px;
-            font-weight: 700;
-            border-top: 2px solid var(--black);
-            border-right: 2px solid var(--black);
-            border-bottom: 2px solid var(--black);
-        }
-
-        .footer {
-            margin-top: 50px;
-            text-align: center;
-            font-weight: 900;
-            text-transform: uppercase;
+            background: #ffecb3;
+            border: 2px dashed var(--black);
+            padding: 10px;
             font-size: 0.9rem;
+            margin-top: 10px;
         }
 
-        @media print {
-            body { padding: 0; }
-            .card { box-shadow: 5px 5px 0px var(--black); margin-bottom: 20px; }
-        }
+        footer { text-align: center; font-weight: 900; margin-top: 50px; text-transform: uppercase; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header style="margin-bottom: 60px;">
-            <h1>SOP TERMUX GIT pelerrr</h1>
-            <p style="font-weight: 700; font-size: 1.2rem; margin-top: 20px;">Panduan Strategis Hosting Website ke GitHub Pages.</p>
-        </header>
 
-        <!-- STEP 1 -->
-        <div class="card">
-            <span class="step-num">01</span>
-            <h2>SETUP ENVIRONMENT</h2>
-            <div class="badge badge-blue">Wajib Sekali</div>
-            <p>Pastikan sistem Termux siap dan identitas developer terdaftar.</p>
-            <pre>pkg update && pkg upgrade
-pkg install git
-git config --global user.name "namakamu"
-git config --global user.email "emailkamu@gmail.com"
-git config --global credential.helper store</pre>
+<div class="container">
+    <div class="header">
+        <h1>TERMUX GIT SOP</h1>
+        <p>No more errors. Just push it.</p>
+    </div>
+
+    <div class="step-card">
+        <div class="step-tag">FASE 1</div>
+        <h2>Setup Awal Sistem</h2>
+        <p>Lakukan ini satu kali saja saat install ulang Termux.</p>
+        
+        <div class="code-wrapper">
+            <button class="copy-btn" onclick="copyText('c1')">Copy</button>
+            <code id="c1">pkg update && pkg upgrade && pkg install git</code>
         </div>
 
-        <!-- STEP 2 -->
-        <div class="card">
-            <span class="step-num">02</span>
-            <h2>INISIALISASI PROYEK</h2>
-            <div class="badge badge-orange">Internal Lebih Aman</div>
-            <p>Pilih folder di internal <code>~/</code> untuk menghindari masalah permission.</p>
-            <pre>cd ~
-mkdir nama-project && cd nama-project
-git init -b main</pre>
-            <div class="note">⚠️ JIKA DI SD CARD: Jalankan <code>git config --global --add safe.directory $(pwd)</code></div>
+        <div class="code-wrapper">
+            <button class="copy-btn" onclick="copyText('c2')">Copy</button>
+            <code id="c2">git config --global user.name "Fandevid" && git config --global user.email "arfanarfandiyt@gmail.com"</code>
         </div>
 
-        <!-- STEP 3 -->
-        <div class="card">
-            <span class="step-num">03</span>
-            <h2>KONTEN & COMMIT</h2>
-            <div class="badge badge-red">Wajib index.html</div>
-            <p>Buat file dan simpan perubahan ke database Git lokal.</p>
-            <pre>echo "&lt;h1&gt;Hello World&lt;/h1&gt;" > index.html
-git add .
-git commit -m "Initial commit"</pre>
-        </div>
-
-        <!-- STEP 4 -->
-        <div class="card">
-            <span class="step-num">04</span>
-            <h2>KONEKSI & PUSH</h2>
-            <div class="badge badge-blue">Gunakan PAT</div>
-            <p>Hubungkan ke repo GitHub dan kirim file. Gunakan <b>Token</b> sebagai password.</p>
-            <pre>git remote add origin https://github.com/USERNAME/REPO.git
-git push -u origin main</pre>
-        </div>
-
-        <!-- TIPS -->
-        <div class="card" style="background: var(--accent-4);">
-            <h2>💡 RUMUS 3-P (RUTINITAS)</h2>
-            <p>Setiap kali ada perubahan kode, jalankan:</p>
-            <pre>1. git add .
-2. git commit -m "Update"
-3. git push</pre>
-        </div>
-
-        <div class="footer">
-            Dibuat untuk Fandev • Analitis & Tegas • 2026
+        <div class="code-wrapper">
+            <button class="copy-btn" onclick="copyText('c3')">Copy</button>
+            <code id="c3">git config --global credential.helper store</code>
         </div>
     </div>
+
+    <div class="step-card">
+        <div class="step-tag">FASE 2</div>
+        <h2>Buat Project Baru</h2>
+        <p>Gunakan perintah ini untuk memulai folder project baru di internal.</p>
+        
+        <div class="code-wrapper">
+            <button class="copy-btn" onclick="copyText('c4')">Copy</button>
+            <code id="c4">cd ~ && mkdir project-name && cd project-name && git init -b main</code>
+        </div>
+
+        <div class="note"><b>PENTING:</b> Buat repo di GitHub dulu, baru push di bawah ini.</div>
+
+        <div class="code-wrapper">
+            <button class="copy-btn" onclick="copyText('c5')">Copy</button>
+            <code id="c5">git add . && git commit -m "Initial commit" && git push -u origin main</code>
+        </div>
+    </div>
+
+    <div class="step-card" style="border-color: var(--accent);">
+        <div class="step-tag" style="background: var(--success); color: black;">FASE 3</div>
+        <h2>Update Konten (Harian)</h2>
+        <p>Ritual 3-P setiap kali mengubah file.</p>
+        
+        <div class="code-wrapper">
+            <button class="copy-btn" onclick="copyText('c6')">Copy</button>
+            <code id="c6">git add . && git commit -m "Update konten" && git push</code>
+        </div>
+    </div>
+
+    <footer>
+        DIBUAT OLEH GEMINI UNTUK FANDEVID &copy; 2026
+    </footer>
+</div>
+
+<script>
+    function copyText(id) {
+        const text = document.getElementById(id).innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            const btn = document.querySelector(`[onclick="copyText('${id}')"]`);
+            const originalText = btn.innerText;
+            btn.innerText = "COPIED!";
+            btn.style.background = "#fff";
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.style.background = "#00F0FF";
+            }, 1000);
+        });
+    }
+</script>
+
 </body>
 </html>
