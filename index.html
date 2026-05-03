@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOP Hosting GitHub via Termux</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap');
+
+        :root {
+            --bg-color: #f4f1de;
+            --accent-1: #ff5e5e; /* Red */
+            --accent-2: #80ed99; /* Green */
+            --accent-3: #4895ef; /* Blue */
+            --accent-4: #f7b267; /* Orange */
+            --black: #000000;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Public Sans', sans-serif;
+            color: var(--black);
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Neobrutalism Style */
+        .card {
+            background: white;
+            border: 4px solid var(--black);
+            box-shadow: 10px 10px 0px var(--black);
+            padding: 30px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        h1 {
+            font-weight: 900;
+            font-size: 3rem;
+            text-transform: uppercase;
+            margin-top: 0;
+            background: var(--accent-1);
+            display: inline-block;
+            padding: 10px 20px;
+            border: 4px solid var(--black);
+            box-shadow: 6px 6px 0px var(--black);
+            transform: rotate(-2deg);
+        }
+
+        h2 {
+            font-weight: 900;
+            text-transform: uppercase;
+            border-bottom: 4px solid var(--black);
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .step-num {
+            background: var(--accent-2);
+            padding: 5px 15px;
+            border: 3px solid var(--black);
+            font-weight: 900;
+            margin-right: 10px;
+            box-shadow: 4px 4px 0px var(--black);
+        }
+
+        code, pre {
+            font-family: 'Space Mono', monospace;
+            background: #e9ecef;
+            border: 2px solid var(--black);
+            padding: 15px;
+            display: block;
+            white-space: pre-wrap;
+            word-break: break-all;
+            margin: 15px 0;
+            font-weight: 700;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            font-weight: 700;
+            border: 2px solid var(--black);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .badge-red { background: var(--accent-1); }
+        .badge-blue { background: var(--accent-3); }
+        .badge-orange { background: var(--accent-4); }
+
+        .note {
+            background: #fff;
+            border-left: 10px solid var(--accent-3);
+            padding: 15px;
+            margin-top: 20px;
+            font-weight: 700;
+            border-top: 2px solid var(--black);
+            border-right: 2px solid var(--black);
+            border-bottom: 2px solid var(--black);
+        }
+
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        @media print {
+            body { padding: 0; }
+            .card { box-shadow: 5px 5px 0px var(--black); margin-bottom: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header style="margin-bottom: 60px;">
+            <h1>SOP TERMUX GIT</h1>
+            <p style="font-weight: 700; font-size: 1.2rem; margin-top: 20px;">Panduan Strategis Hosting Website ke GitHub Pages.</p>
+        </header>
+
+        <!-- STEP 1 -->
+        <div class="card">
+            <span class="step-num">01</span>
+            <h2>SETUP ENVIRONMENT</h2>
+            <div class="badge badge-blue">Wajib Sekali</div>
+            <p>Pastikan sistem Termux siap dan identitas developer terdaftar.</p>
+            <pre>pkg update && pkg upgrade
+pkg install git
+git config --global user.name "namakamu"
+git config --global user.email "emailkamu@gmail.com"
+git config --global credential.helper store</pre>
+        </div>
+
+        <!-- STEP 2 -->
+        <div class="card">
+            <span class="step-num">02</span>
+            <h2>INISIALISASI PROYEK</h2>
+            <div class="badge badge-orange">Internal Lebih Aman</div>
+            <p>Pilih folder di internal <code>~/</code> untuk menghindari masalah permission.</p>
+            <pre>cd ~
+mkdir nama-project && cd nama-project
+git init -b main</pre>
+            <div class="note">⚠️ JIKA DI SD CARD: Jalankan <code>git config --global --add safe.directory $(pwd)</code></div>
+        </div>
+
+        <!-- STEP 3 -->
+        <div class="card">
+            <span class="step-num">03</span>
+            <h2>KONTEN & COMMIT</h2>
+            <div class="badge badge-red">Wajib index.html</div>
+            <p>Buat file dan simpan perubahan ke database Git lokal.</p>
+            <pre>echo "&lt;h1&gt;Hello World&lt;/h1&gt;" > index.html
+git add .
+git commit -m "Initial commit"</pre>
+        </div>
+
+        <!-- STEP 4 -->
+        <div class="card">
+            <span class="step-num">04</span>
+            <h2>KONEKSI & PUSH</h2>
+            <div class="badge badge-blue">Gunakan PAT</div>
+            <p>Hubungkan ke repo GitHub dan kirim file. Gunakan <b>Token</b> sebagai password.</p>
+            <pre>git remote add origin https://github.com/USERNAME/REPO.git
+git push -u origin main</pre>
+        </div>
+
+        <!-- TIPS -->
+        <div class="card" style="background: var(--accent-4);">
+            <h2>💡 RUMUS 3-P (RUTINITAS)</h2>
+            <p>Setiap kali ada perubahan kode, jalankan:</p>
+            <pre>1. git add .
+2. git commit -m "Update"
+3. git push</pre>
+        </div>
+
+        <div class="footer">
+            Dibuat untuk Fandev • Analitis & Tegas • 2026
+        </div>
+    </div>
+</body>
+</html>
